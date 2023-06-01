@@ -1,0 +1,37 @@
+<div class="container">
+    <h2 class="text-center">Employee List</h2>
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th class="col-sm-1">Sr.</th>
+                    <th class="col-sm-1">F_Name</th>
+                    <th class="col-sm-1">L_Name</th>
+                    <th class="col-sm-1">Age</th>
+                    <th class="col-sm-2">Email</th>
+                    <th class="col-sm-2">C_Number</th>
+                    <th class="col-sm-1">u_Name</th>
+                    <th class="col-sm-1">Password</th>
+                    <th class="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let employee of employees; let i = index">
+                    <td>{{i+1}}</td>
+                    <td>{{employee.firstName}}</td>
+                    <td>{{employee.lastName}}</td>
+                    <td>{{employee.age}}</td>
+                    <td>{{employee.email}}</td>
+                    <td>{{employee.contact}}</td>
+                    <td>{{employee.userName}}</td>
+                    <td>{{employee.password}}</td>
+                    <td>
+                        <button class="btn btn-primary" (click)="onedit(employee.id)">Edit</button>
+                        <button class="btn btn-danger" (click)="ondelete(employee.id)">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <p *ngIf="!employees || employees.length <= 0" class="text-center">No Employee Found</p>
+</div>
