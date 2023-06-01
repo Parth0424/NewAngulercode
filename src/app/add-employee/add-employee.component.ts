@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { EmployeeService } from '../employee.service';
 import { Employee } from '../models/employee-model';
 import { Router } from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms';
+
 
 @Component({
   selector: 'app-add-employee',
@@ -11,32 +13,50 @@ import { Router } from '@angular/router';
 })
 export class AddEmployeeComponent implements OnInit {
 
-  addemployee: Employee ={
-    id:0,
-    firstName:'',
-    lastName:'',
-    contact:'',
-    email:'',
-    age:0,
-    userName:'',
-    password:'',
-  };
-  errorMessage: string = ''; // Variable to hold the error message
-
-  constructor(private employeeService:EmployeeService,private router :Router){}
-
-  ngOnInit(): void {}
   
-  onSubmit(){
-    console.log(this.addemployee);
-    this.addEmployee();
+  errorMessage: string = '';
+
+  addEmployeeForm: FormGroup = new FormGroup({});
+
+constructor(
+  private formBuilder: FormBuilder,
+  private employeeService: EmployeeService,
+  private router: Router
+) {}
+
+
+  ngOnInit(): void {
+    this.createAddEmployeeForm();
+  }
+
+  createAddEmployeeForm() {
+    this.addEmployeeForm = this.formBuilder.group({
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      contact: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
+      email: ['', [Validators.required, Validators.email]],
+      age: [0, Validators.required],
+      userName: ['', Validators.required],
+      password: ['', [Validators.required, Validators.minLength(6)]]
+    });
   }
   
-  addEmployee(){
-    this.employeeService.addEmployee(this.addemployee).subscribe(
+
+  onSubmit() {
+    if (this.addEmployeeForm.invalid) {
+      this.errorMessage = 'Please fill in all the required fields.';
+      return;
+    }
+
+    console.log(this.addEmployeeForm.value);
+    this.addEmployee();
+  }
+
+  addEmployee() {
+    this.employeeService.addEmployee(this.addEmployeeForm.value).subscribe(
       (data) => {
         console.log(data);
-        this.router.navigate(["view"]);
+        this.router.navigate(['view']);
       },
       (error) => {
         if (error.status === 400 && error.error) {
@@ -46,7 +66,7 @@ export class AddEmployeeComponent implements OnInit {
           for (const fieldName in validationErrors) {
             if (validationErrors.hasOwnProperty(fieldName)) {
               const fieldErrors = validationErrors[fieldName];
-              this.errorMessage += fieldErrors.join(', ') + ' ';
+              this.errorMessage += `${fieldName} ${fieldErrors.join(', ')} `;
             }
           }
         }

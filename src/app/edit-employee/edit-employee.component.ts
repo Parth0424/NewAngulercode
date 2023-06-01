@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EmployeeService } from '../employee.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-edit-employee',
@@ -15,7 +16,7 @@ export class EditEmployeeComponent implements OnInit {
     firstName: '',
     lastName: '',
     contact: '',
-    email: '',
+    email: ['', [Validators.email]],
     age: 0,
     userName:'',
     paswword: '',
