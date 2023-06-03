@@ -1,46 +1,37 @@
-<p>add-employee works!</p>
 <div class="container mt-4">
   <h2 class="text-center">Add Employee</h2>
-  <form [formGroup]="addEmployeeForm" (ngSubmit)="onSubmit()">
-
-    <div class="form-group">
-      <label for="firstname">FirstName</label>
-      <input type="text" class="form-control" id="firstname" formControlName="firstName">
-      <div *ngIf="addEmployeeForm.get('firstName')?.invalid && addEmployeeForm.get('firstName')?.touched" class="text-danger">First Name is required</div>
-    </div>
-    <div class="form-group">
-      <label for="lastname">LastName</label>
-      <input type="text" class="form-control" id="lastname" formControlName="lastName">
-      <div *ngIf="addEmployeeForm.get('lastName')?.invalid && addEmployeeForm.get('lastName')?.touched" class="text-danger">Last Name is required</div>
-    </div>
-    <div class="form-group">
-      <label for="contact">Contact No</label>
-      <input type="text" class="form-control" id="contact" formControlName="contact" pattern="^[0-9]{10}$">
-
-      <div *ngIf="addEmployeeForm.get('contact')?.invalid && addEmployeeForm.get('contact')?.touched" class="text-danger">Contact No is required and shoud be 10 digit</div>
-    </div>
-    <div class="form-group">
-      <label for="email">Email</label>
-      <input type="email" class="form-control" id="email" formControlName="email">
-      <div *ngIf="addEmployeeForm.get('email')?.invalid && addEmployeeForm.get('email')?.touched" class="text-danger">Email is required and should be a valid email address</div>
-    </div>
-    <div class="form-group">
-      <label for="age">Age</label>
-      <input type="number" class="form-control" id="age" formControlName="age">
-      <div *ngIf="addEmployeeForm.get('age')?.invalid && addEmployeeForm.get('age')?.touched" class="text-danger">Age is required</div>
-    </div>
-    <div class="form-group">
-      <label for="username">UserName</label>
-      <input type="text" class="form-control" id="username" formControlName="userName">
-      <div *ngIf="addEmployeeForm.get('userName')?.invalid && addEmployeeForm.get('userName')?.touched" class="text-danger">Username is required</div>
-    </div>
-    <div class="form-group">
-      <label for="password">Password</label>
-      <input type="password" class="form-control" id="password" formControlName="password" minlength="6">
-
-      <div *ngIf="addEmployeeForm.get('password')?.invalid && addEmployeeForm.get('password')?.touched" class="text-danger">Password is required and min length 6</div>
-    </div>
-    <div *ngIf="errorMessage" class="text-danger">{{ errorMessage }}</div>
-    <button type="submit" class="btn btn-primary">Add</button>
+  <form (ngSubmit)="onSubmit()" #Form="ngForm">
+      <div class="form-group">
+          <label for="firstname">FirstName</label>
+          <input type="text" class="form-control" id="firstname" name="firstname" [(ngModel)]="addemployee.firstName" required>
+      </div>
+      <div class="form-group">
+          <label for="lastname">LastName</label>
+          <input type="text" class="form-control" id="lastname" name="lastname" [(ngModel)]="addemployee.lastName" required>
+      </div>
+      <div class="form-group">
+          <label for="contact">Contact No</label>
+          <input type="text" class="form-control" id="contact" name="contact" [(ngModel)]="addemployee.contact" required>
+      </div>
+      <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" class="form-control" id="email" name="email" [(ngModel)]="addemployee.email" required>
+      </div>
+      <div class="form-group">
+          <label for="age">Age</label>
+          <input type="number" class="form-control" id="age" name="age" [(ngModel)]="addemployee.age" required>
+      </div>
+      <div class="form-group">
+          <label for="username">UserName</label>
+          <input type="text" class="form-control" id="username" name="username" [(ngModel)]="addemployee.userName" required>
+      </div>
+      <div class="form-group">
+          <label for="password">Password</label>
+          <input type="text" class="form-control" id="password" name="password" [(ngModel)]="addemployee.password" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Add</button>
   </form>
+  <p *ngIf="errorMessage" class="text-danger">
+      <span *ngFor="let error of errorMessage.split('\n')">{{ error }}</span>
+  </p>
 </div>

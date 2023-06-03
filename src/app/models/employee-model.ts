@@ -2,7 +2,7 @@ export interface Employee {
   id:number;
     firstName: string;
     lastName: string;
-    contact: string;
+    contact: number;
     email: string;
     age: number;
     userName: string;

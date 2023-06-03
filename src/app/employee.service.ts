@@ -22,7 +22,7 @@ export class EmployeeService {
   }
 
   getEmployee(id: number):Observable<Employee>{
-    return this.http.get<Employee>(this.baseApiUrl + 'api/Employee/id?id='+ id)
+    return this.http.get<Employee>(this.baseApiUrl + 'api/Employee/'+ id)
   }
 
   deleteEmployee(id: number):Observable<Employee>{

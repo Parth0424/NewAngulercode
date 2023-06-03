@@ -8,41 +8,42 @@
     </div>
     <div class="form-group">
       <label for="firstname">FirstName</label>
-      <input type="text" class="form-control" id="firstname" name="firstname" [(ngModel)]="editEmployee.firstName" required>
-      <div *ngIf="Form.controls['firstname'].touched && Form.controls['firstname'].errors?.['required']" class="text-danger">First name is required.</div>
+      <input type="text" class="form-control" id="firstname" name="firstname" [(ngModel)]="editEmployee.firstName" >
+     
     </div>
     <div class="form-group">
       <label for="name">LastName</label>
       <input type="text" class="form-control" id="lastname" name="lastname" [(ngModel)]="editEmployee.lastName" required>
-      <div *ngIf="Form.controls['lastname'].touched && Form.controls['lastname'].errors?.['required']" class="text-danger">Last name is required.</div>
+     
     </div>
     <div class="form-group">
       <label for="contact">Contact No</label>
-      <input type="text" class="form-control" id="contact" name="contact" [(ngModel)]="editEmployee.contact" pattern="^[0-9]{10}$" required>
-      <div *ngIf="Form.controls['contact'].touched && Form.controls['contact'].errors?.['required']" class="text-danger">Contact number is required And must be 10 digit.</div>
+      <input type="number" class="form-control" id="contact" name="contact" [(ngModel)]="editEmployee.contact"  required>
+      
     </div>
     <div class="form-group">
       <label for="email">Email</label>
       <input type="email" class="form-control" id="email" name="email" [(ngModel)]="editEmployee.email"  required>
-      <div *ngIf="Form.controls['email'].touched && Form.controls['email'].errors?.['required']" class="text-danger">Email is required.</div>
+      
       
     </div>
     <div class="form-group">
       <label for="age">Age</label>
       <input type="number" class="form-control" id="age" name="age" [(ngModel)]="editEmployee.age" required>
-      <div *ngIf="Form.controls['age'].touched && Form.controls['age'].errors?.['required']" class="text-danger">Age is required.</div>
+     
     </div>
     <div class="form-group">
       <label for="username">UserName</label>
       <input type="text" class="form-control" id="username" name="username" [(ngModel)]="editEmployee.userName" required>
-      <div *ngIf="Form.controls['username'].touched && Form.controls['username'].errors?.['required']" class="text-danger">Username is required.</div>
+     
     </div>
     <div class="form-group">
       <label for="password">Password</label>
       <input type="password" class="form-control" id="password" name="password" [(ngModel)]="editEmployee.password" minlength="6" required>
-      <div *ngIf="Form.controls['password'].touched && Form.controls['password'].errors?.['required']" class="text-danger">Password is required and min length 6.</div>
+      
     </div>
-    <div *ngIf="errorMessage" class="text-danger">{{ errorMessage }}</div>
+    
     <button type="submit" class="btn btn-primary">Edit</button>
   </form>
+  <div *ngIf="errorMessage" class="text-danger">{{ errorMessage }}</div>
 </div>
